@@ -27,6 +27,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  shared_preferences:
+  provider:
+  google_fonts: 
+  easy_splash_screen:
+  http: ^0.13.5
   flutter:
     sdk: flutter
 
