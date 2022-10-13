@@ -27,9 +27,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  number_inc_dec: 
+  permission_handler: 
+  flutter_polyline_points: ^1.0.0
+  google_maps_flutter: ^2.1.7
+  location: ^4.4.0
+  anim_search_bar: 
+  carousel_pro:
+  dropdown_plus:
+  carousel_slider:
+  theme_provider:
+  flutter_profile_picture: 
   shared_preferences:
   provider:
   google_fonts: 
+  syncfusion_flutter_charts:
   easy_splash_screen:
   http: ^0.13.5
   flutter:
