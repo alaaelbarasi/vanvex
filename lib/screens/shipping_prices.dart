@@ -44,13 +44,13 @@ class _ShippingPricesState extends State<ShippingPrices> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                   Text(
-                    "Shipping Prices",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.blue.shade600,
-                        fontFamily: GoogleFonts.abel().fontFamily),
-                  ),
+                    Text(
+                      "Shipping Prices",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.blue.shade600,
+                          fontFamily: GoogleFonts.abel().fontFamily),
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
@@ -68,26 +68,31 @@ class _ShippingPricesState extends State<ShippingPrices> {
                             ),
                             DataColumn(
                               label: Text('City',
-                                  style: TextStyle(color: Colors.blue.shade700)),
+                                  style:
+                                      TextStyle(color: Colors.blue.shade700)),
                             ),
                             DataColumn(
                               label: Text('ZIP code',
-                                  style: TextStyle(color: Colors.blue.shade700)),
+                                  style:
+                                      TextStyle(color: Colors.blue.shade700)),
                             ),
                             DataColumn(
                               label: Text('Price',
-                                  style: TextStyle(color: Colors.blue.shade700)),
+                                  style:
+                                      TextStyle(color: Colors.blue.shade700)),
                             ),
                             DataColumn(
                               label: Text('Shipping Duration',
-                                  style: TextStyle(color: Colors.blue.shade700)),
+                                  style:
+                                      TextStyle(color: Colors.blue.shade700)),
                             ),
                           ],
                           rows: const <DataRow>[
                             DataRow(
                               cells: <DataCell>[
                                 DataCell(
-                                  Text('1', style: TextStyle(color: Colors.pink)),
+                                  Text('1',
+                                      style: TextStyle(color: Colors.pink)),
                                 ),
                                 DataCell(Text('Tripoli')),
                                 DataCell(Text('TIP')),

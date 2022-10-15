@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 import 'package:provider/provider.dart';
+import 'package:vanvex/screens/vistor_screen.dart';
 
 import '../provider/user_provider.dart';
 import '../screens/market_screen.dart';
@@ -86,7 +87,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => const VistorScreen())));
+                          },
                           child: Text(
                             "Log out ..",
                             style: TextStyle(color: Colors.blue.shade700),

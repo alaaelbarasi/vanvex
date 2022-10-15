@@ -15,16 +15,38 @@ class ShippingScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue.shade700,
-          title: const Text('Shipment'),
-          bottom: const TabBar(
-            indicatorColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.blue),
+          title: Text(
+            'Shipment',
+            style: TextStyle(color: Colors.blue.shade700),
+          ),
+          centerTitle: true,
+          bottom: TabBar(
+            labelColor: Colors.blue.shade900,
+            indicatorColor: Colors.blue.shade50,
             tabs: [
               Tab(
-                  icon: Icon(Icons.local_shipping_rounded),
+                  icon: Icon(
+                    Icons.local_shipping_rounded,
+                    color: Colors.blue.shade700,
+                  ),
                   text: "Display Shipments"),
-              Tab(icon: Icon(Icons.add_circle), text: "Add Shipment"),
-              Tab(icon: Icon(Icons.attach_money), text: "View Prices")
+              Tab(
+                  icon: Icon(
+                    Icons.add_circle,
+                    color: Colors.blue.shade700,
+                  ),
+                  text: "Add Shipment"),
+              Tab(
+                icon: Icon(
+                  Icons.attach_money,
+                  color: Colors.blue.shade700,
+                ),
+                text: "View Prices",
+                // TextStyle(color: Colors.blue.shade700),
+              )
             ],
           ),
         ),
