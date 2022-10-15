@@ -15,7 +15,8 @@ class ShipmentProvider extends ChangeNotifier {
   }
 
   setListOfshipments(value) {
-    _listOfshipments.add(value);
+    _listOfshipments.clear();
+    _listOfshipments.addAll(value);
     notifyListeners();
   }
 
@@ -49,9 +50,8 @@ class ShipmentProvider extends ChangeNotifier {
     setisBusy(false);
   }
 
-  getShipmentsApi() async {
+  getShipmentsApi({isInit = false}) async {
     setisBusy(true);
-
     final shipments = await ShipApi().getShippment();
     setListOfshipments(shipments);
     setisBusy(false);

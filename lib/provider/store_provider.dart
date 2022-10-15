@@ -27,7 +27,7 @@ class StoreProvider extends BaseProvider {
   getStoreFromApi({isInit = false, required storeId}) async {
     setIsBusy(true, isInit: isInit);
     setIsfailed(false, isInit: isInit);
-    final response = await StoreApi().getStoreById(userId: storeId);
+    final response = await StoreApi().getStoreById(storeId: storeId);
     if (response == null) {
       setIsBusy(false, isInit: isInit);
       setIsfailed(true, isInit: isInit);

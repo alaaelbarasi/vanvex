@@ -1,12 +1,9 @@
-import 'package:vanvex/model/shipment.dart';
 import 'package:vanvex/model/store.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:vanvex/model/user.dart';
-
 class StoreApi {
-  final storeUrl = "http://localhost:3000/stores";
+  final storeUrl = "http://10.0.2.2:3000/stores";
   // get all stores
   Future getStores() async {
     List<StoreModel> stores = [];
@@ -20,13 +17,17 @@ class StoreApi {
   }
 
   // get all store by id
-  Future getStoreById({required userId}) async {
-    UserModel? user;
-    final response = await http.get(Uri.parse(storeUrl + "/" + userId));
+  Future getStoreById({required storeId}) async {
+    StoreModel? store;
+    final response =
+        await http.get(Uri.parse(storeUrl + "/" + storeId.toString()));
+    // print(response.body);
+
     if (response.statusCode == 200) {
-      user = userModelFromJson(response.body);
+      print(response.body);
+      store = storeModelFromJson(response.body);
     }
-    return user;
+    return store;
   }
 
   //post

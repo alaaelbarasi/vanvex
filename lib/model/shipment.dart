@@ -14,7 +14,7 @@ class ShipmentModel {
     required this.id,
     required this.code,
     required this.desc,
-    required this.numberOfItems,
+    this.numberOfItems = "0",
     required this.state,
     required this.price,
     required this.paymentMethod,
@@ -31,9 +31,9 @@ class ShipmentModel {
   int id;
   String code;
   String desc;
-  int numberOfItems;
+  String numberOfItems;
   String state;
-  int price;
+  String price;
   String paymentMethod;
   String paymentOn;
   String customerName;

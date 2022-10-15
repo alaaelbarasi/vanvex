@@ -4,7 +4,6 @@ import 'package:vanvex/provider/user_provider.dart';
 import 'package:vanvex/widgets/appBar_widget.dart';
 import 'package:vanvex/widgets/body_of_profile_details_widget.dart';
 import 'package:vanvex/widgets/cover_image_widget.dart';
-import 'package:vanvex/widgets/profile_detaile_widget.dart';
 import 'package:vanvex/widgets/profile_image_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -17,8 +16,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late final userId;
   void initState() {
-    super.initState();
     Provider.of<UserProvider>(context, listen: false).getUserFromApi(userId: 1);
+    super.initState();
   }
 
   @override
@@ -34,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Consumer<UserProvider>(builder: (context, provider, _) {
         return provider.isBusy
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : SizedBox(
                 height: height,
                 width: width,
@@ -55,9 +54,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               )),
                         ],
                       ),
-                      const Text(
-                        "User name",
-                        style: TextStyle(fontSize: 20),
+                      Text(
+                        provider.user?.name ?? 'User name',
+                        style: const TextStyle(fontSize: 20),
                       ),
                       const SizedBox(
                         height: 10,

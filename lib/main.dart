@@ -6,8 +6,6 @@ import 'package:vanvex/screens/home_screen.dart';
 import 'package:vanvex/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'dart:io';
-
 void main() {
   runApp(const MyApp());
 }

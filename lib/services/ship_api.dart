@@ -4,7 +4,8 @@ import 'dart:convert';
 import '../model/shipment.dart';
 
 class ShipApi {
-  final shipUrl = "http://localhost:3000/shipments";
+  final shipUrl = "http://10.0.2.2:3000/shipments";
+
   // get all ships
   Future getShippment() async {
     List<ShipmentModel> shipList = [];
@@ -17,8 +18,8 @@ class ShipApi {
 
     for (final element in list) {
       shipList.add(ShipmentModel.fromJson(element));
+      // print(shipList);
     }
-    print(shipList.first.code);
     return shipList;
   }
 
@@ -30,8 +31,9 @@ class ShipApi {
     if (response.statusCode == 200) {
       ship = shipmentModelFromJson(response.body);
       // fromJson goes here
+      return ship;
     }
-    return ship;
+    return null;
   }
 
   //post
@@ -50,7 +52,7 @@ class ShipApi {
       "desc": des,
       "code": code,
       "numberOfItems": noOfItem,
-      "state": "recieved",
+      "state": "Recieved",
       "price": shipPrice,
       "paymentMethod": paymentMethod,
       "paymentOn": costOn,
@@ -60,7 +62,7 @@ class ShipApi {
       "customer_city": customerCity,
       "lng": 13.1913,
       "lat": 32.8872,
-      // "storeId": 1
+      "storeId": "1"
     };
 
     final response = await http.post(Uri.parse(shipUrl),
@@ -74,7 +76,8 @@ class ShipApi {
 
   //delete
   Future<bool> deleteShipment({required shipId}) async {
-    final response = await http.delete(Uri.parse(shipUrl + "/" + shipId));
+    final response =
+        await http.delete(Uri.parse(shipUrl + "/" + shipId.toString()));
     if (response.statusCode == 200) {
       return true;
     }

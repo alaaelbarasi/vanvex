@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:vanvex/model/user.dart';
 
 class UserApi {
-  final userUrl = "http://localhost:3000/users";
+  final userUrl = "http://10.0.2.2:3000/users";
 // 10.0.2.2:
   // get all users
   Future getUsers() async {
@@ -18,13 +18,16 @@ class UserApi {
     return users;
   }
 
-  // get user by id
   Future getUserById({required userId}) async {
     UserModel? user;
-    final response = await http.get(Uri.parse("$userUrl/$userId"));
+    final response =
+        await http.get(Uri.parse(userUrl + "/" + userId.toString()));
+
     if (response.statusCode == 200) {
-      user = json.decode(response.body);
+      print(response.body);
+      user = userModelFromJson(response.body);
     }
+
     return user;
   }
 

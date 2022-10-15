@@ -29,7 +29,6 @@ class UserProvider extends BaseProvider {
     setIsfailed(false, isInit: isInit);
     final response = await UserApi().getUserById(userId: userId);
     if (response == null) {
-      print("null");
       setIsBusy(false, isInit: isInit);
       setIsfailed(true, isInit: isInit);
       return;

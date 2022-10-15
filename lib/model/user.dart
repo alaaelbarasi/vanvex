@@ -13,7 +13,6 @@ class UserModel {
     required this.id,
     required this.name,
     required this.password,
-
     required this.storeId,
     required this.phone,
     required this.email,
@@ -33,7 +32,6 @@ class UserModel {
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
         password: json["password"] == null ? null : json["password"],
-       
         storeId: json["storeId"] == null ? null : json["storeId"],
         phone: json["phone"] == null ? null : json["phone"],
         email: json["email"] == null ? null : json["email"],
@@ -44,7 +42,6 @@ class UserModel {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
         "password": password == null ? null : password,
-       
         "storeId": storeId == null ? null : storeId,
         "phone": phone == null ? null : phone,
         "email": email == null ? null : email,
