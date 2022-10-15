@@ -87,7 +87,7 @@ class _LoginState extends State<Login> {
                 onPressed: () async {
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
-                    if (emailController.text == "rodaina@gmail.com" &&
+                    if (emailController.text == "ion@gmail.com" &&
                         passwordController.text == "password") {
                       Navigator.push(
                         context,

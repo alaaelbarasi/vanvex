@@ -35,18 +35,7 @@ class _BodyOfProfileWidgetState extends State<BodyOfProfileWidget> {
             ProfileDetailWidgwt(
                 title: "store code", trailing: widget.StoreCode),
             ProfileDetailWidgwt(title: "city", trailing: widget.city),
-            // SizedBox(
-            //   width: 80,
-            //   child: ElevatedButton(
-            //     onPressed: () {},
-            //     style: ElevatedButton.styleFrom(
-            //       primary: const Color(0xffb536DFE),
-            //       shape: const RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.all(Radius.circular(50))),
-            //     ),
-            //     child: const Text("data"),
-            //   ),
-            // ),
+           
           ],
         ),
       ),

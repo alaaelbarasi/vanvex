@@ -14,7 +14,7 @@ class SingleShipWidget extends StatefulWidget {
 
 class _SingleShipWidgetState extends State<SingleShipWidget> {
   bool isClicked = false;
-  Color iconColor = Color(0xffb757575);
+  Color iconColor = Colors.pinkAccent;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -22,18 +22,27 @@ class _SingleShipWidgetState extends State<SingleShipWidget> {
         leading: IconButton(
           onPressed: () {
             setState(() {
-              iconColor = isClicked ? Color(0xffbC2185B) : Color(0xffb757575);
+              iconColor = isClicked ? Color(0xffb757575) : Color(0xffbC2185B);
               isClicked = !isClicked;
             });
           },
           icon: Icon(
             Icons.local_shipping_outlined,
-            size: 35,
+            size: 38,
             color: iconColor,
           ),
         ),
-        title: Text(widget.title),
-        subtitle: Text(widget.shipCode),
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(widget.shipCode,
+            style: const TextStyle(
+              color: Colors.blueAccent,
+            )),
         isThreeLine: true,
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CoverImageWidget extends StatelessWidget {
   const CoverImageWidget({Key? key}) : super(key: key);
@@ -10,7 +8,13 @@ class CoverImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      color: Color.fromARGB(255, 158, 158, 158),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/cover.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      // color: Color.fromARGB(255, 158, 158, 158),
       height: size.height / 4,
     );
   }
