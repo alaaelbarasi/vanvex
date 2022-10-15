@@ -25,8 +25,9 @@ class _MarketScreenState extends State<MarketScreen>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      // backgroundColor: Colors.white,
       appBar: const AppBarWidget(
-        screen_name: "Market",
+        screen_name: "Store",
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),

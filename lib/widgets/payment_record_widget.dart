@@ -63,10 +63,10 @@ class _PaymentRecordWidgetState extends State<PaymentRecordWidget> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
-                  width: size.width / 2,
+                  width: size.width / 2.5,
                   child: Card(
                     color: Colors.blueGrey.shade50,
-                    elevation: 60,
+                    elevation: 5,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [

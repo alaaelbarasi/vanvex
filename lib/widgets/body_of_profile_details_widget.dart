@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:vanvex/widgets/profile_detaile_widget.dart';
 
-class BodyOfProfileWidget extends StatelessWidget {
-  const BodyOfProfileWidget({Key? key}) : super(key: key);
+class BodyOfProfileWidget extends StatefulWidget {
+  const BodyOfProfileWidget(
+      {Key? key,
+      required this.userName,
+      required this.email,
+      required this.phone,
+      required this.StoreCode,
+      required this.city})
+      : super(key: key);
+  final userName;
+  final email;
+  final phone;
+  final StoreCode;
+  final city;
+  @override
+  State<BodyOfProfileWidget> createState() => _BodyOfProfileWidgetState();
+}
 
+class _BodyOfProfileWidgetState extends State<BodyOfProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -13,29 +29,24 @@ class BodyOfProfileWidget extends StatelessWidget {
         child: Column(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const ProfileDetailWidgwt(title: "User number", trailing: "000"),
-            const ProfileDetailWidgwt(
-                title: "Email", trailing: "xxx@email.com"),
-            const ProfileDetailWidgwt(
-                title: "Phone number", trailing: "+2189100000"),
-            const ProfileDetailWidgwt(title: "Account type", trailing: "..."),
-            const ProfileDetailWidgwt(title: "Market number", trailing: "000"),
-            const ProfileDetailWidgwt(title: "Market name", trailing: "mm"),
-            const ProfileDetailWidgwt(title: "Market name", trailing: "mm"),
-            const ProfileDetailWidgwt(title: "Market name", trailing: "mm"),
-            const ProfileDetailWidgwt(title: "Market name", trailing: "mm"),
-            SizedBox(
-              width: 80,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xffb536DFE),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50))),
-                ),
-                child: const Text("data"),
-              ),
-            ),
+            ProfileDetailWidgwt(title: "User name", trailing: widget.userName),
+            ProfileDetailWidgwt(title: "Email", trailing: widget.email),
+            ProfileDetailWidgwt(title: "Phone number", trailing: widget.phone),
+            ProfileDetailWidgwt(
+                title: "store code", trailing: widget.StoreCode),
+            ProfileDetailWidgwt(title: "city", trailing: widget.city),
+            // SizedBox(
+            //   width: 80,
+            //   child: ElevatedButton(
+            //     onPressed: () {},
+            //     style: ElevatedButton.styleFrom(
+            //       primary: const Color(0xffb536DFE),
+            //       shape: const RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.all(Radius.circular(50))),
+            //     ),
+            //     child: const Text("data"),
+            //   ),
+            // ),
           ],
         ),
       ),

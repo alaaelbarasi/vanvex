@@ -1,7 +1,11 @@
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:number_inc_dec/number_inc_dec.dart';
+import 'package:http/http.dart' as http;
+
+import '../services/ship_api.dart';
 
 class AddShip extends StatefulWidget {
   const AddShip({super.key});
@@ -11,10 +15,15 @@ class AddShip extends StatefulWidget {
 }
 
 class _AddShipState extends State<AddShip> {
+  final descController = TextEditingController();
+  final priceController = TextEditingController();
+  final customerNameController = TextEditingController();
+  final customerPhoneController = TextEditingController();
+  final addressController = TextEditingController();
+  final numberItemsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const AppBarWidget(screen_name: "Add New Ship"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -22,8 +31,6 @@ class _AddShipState extends State<AddShip> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Image.asset(
-              //     '/Users/rodainaomaer/Desktop/vanvex/assets/images/75-756227_shipping-fast-delivery-icon_thumbnail.png'),
               Container(
                 height: 25,
                 width: 500,
@@ -45,18 +52,22 @@ class _AddShipState extends State<AddShip> {
                       width: 10,
                     ),
                     Text(
-                      "Ship Details",
+                      "Shipment Details",
                       style: TextStyle(color: Colors.white),
                     )
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
+                controller: descController,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
                   ),
-                  labelText: 'Ship Description',
+                  labelText: 'Shipment Description',
                   labelStyle: const TextStyle(color: Colors.pink),
                 ),
                 style: TextStyle(color: Colors.blue.shade600),
@@ -76,7 +87,7 @@ class _AddShipState extends State<AddShip> {
               ),
               NumberInputPrefabbed.roundedButtons(
                 scaleHeight: 0.8,
-                controller: TextEditingController(),
+                controller: numberItemsController,
                 incDecBgColor: Colors.pink.shade400,
                 incIconColor: Colors.white,
                 decIconColor: Colors.white,
@@ -110,14 +121,18 @@ class _AddShipState extends State<AddShip> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
+                controller: priceController,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
                   ),
-                  labelText: 'Ship Price',
+                  labelText: 'Shipment Price',
                   labelStyle: const TextStyle(color: Colors.pink),
                 ),
                 style: TextStyle(color: Colors.blue.shade600),
@@ -139,7 +154,7 @@ class _AddShipState extends State<AddShip> {
                 height: 30,
               ),
               TextDropdownFormField(
-                options: const ["Sender", "Recevier"],
+                options: const ["Store", "Customer"],
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue)),
@@ -178,7 +193,11 @@ class _AddShipState extends State<AddShip> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
+                controller: customerNameController,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -192,6 +211,7 @@ class _AddShipState extends State<AddShip> {
                 height: 20,
               ),
               TextFormField(
+                controller: customerPhoneController,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
@@ -206,19 +226,6 @@ class _AddShipState extends State<AddShip> {
               const SizedBox(
                 height: 20,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue.shade600),
-                  ),
-                  labelText: 'Customer Address',
-                  labelStyle: const TextStyle(color: Colors.pink),
-                ),
-                style: TextStyle(color: Colors.blue.shade600),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
               TextDropdownFormField(
                 options: const ["Benghazi", "Tripoli", "Misrata"],
                 decoration: const InputDecoration(
@@ -232,19 +239,54 @@ class _AddShipState extends State<AddShip> {
               const SizedBox(
                 height: 20,
               ),
+              TextFormField(
+                controller: addressController,
+                decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue.shade600),
+                  ),
+                  labelText: 'Customer Address',
+                  labelStyle: const TextStyle(color: Colors.pink),
+                ),
+                style: TextStyle(color: Colors.blue.shade600),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               SizedBox(
                 height: 50,
                 width: 100,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const HomeScreen(),
-                    //   ),
-                    // );
+                  onPressed: () async {
+                    final response = await ShipApi().addShip(
+                      des: descController.text,
+                      code: "1334",
+                      noOfItem: numberItemsController.text,
+                      customerAdrees: addressController.text,
+                      shipPrice: priceController.text,
+                      paymentMethod: "cash",
+                      custmerPhone: customerPhoneController.text,
+                      custemerName: customerNameController.text,
+                      customerCity: "Benghazi",
+                      costOn: "customer",
+                    );
+                    if (response == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Shipment Was Added Successfully'),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please Enter the'),
+                        ),
+                      );
+                    }
                   },
                   style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.blue.shade700),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(70)),
@@ -253,7 +295,9 @@ class _AddShipState extends State<AddShip> {
                   ),
                   child: const Text(
                     'Add Ship',
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),
