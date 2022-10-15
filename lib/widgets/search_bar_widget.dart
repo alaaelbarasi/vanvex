@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/services.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 
 import '../screens/view_ship.dart';
+import '../services/ship_api.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({Key? key}) : super(key: key);
@@ -22,21 +22,37 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 2, 20, 0),
       child: AnimSearchBar(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+        ],
         color: Colors.grey.shade300,
         width: size.width / 1.5,
         textController: textController,
-        closeSearchOnSuffixTap: false,
+        closeSearchOnSuffixTap: true,
+        helpText: "Shipment ID",
         suffixIcon: const Icon(Icons.search),
-        onSuffixTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ViewShip(),
-            ),
-          );
-          setState(() {
+        onSuffixTap: () async {
+          final response =
+              await ShipApi().getShipById(shipId: textController.text);
+          if (response != null) {
+            // ignore: use_build_context_synchronously
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ViewShip(
+                  response: response,
+                ),
+              ),
+            );
+          } else {
+            // ignore: use_build_context_synchronously
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Shipment ID is Incorrect'),
+              ),
+            );
             textController.clear();
-          });
+          }
         },
       ),
     );

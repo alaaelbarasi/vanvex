@@ -18,17 +18,22 @@ class ShippingScreen extends StatelessWidget {
           backgroundColor: Colors.blue.shade700,
           title: const Text('Shipment'),
           bottom: const TabBar(
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                   icon: Icon(Icons.local_shipping_rounded),
-                  text: "Display Ships"),
-              Tab(icon: Icon(Icons.add_circle), text: "Add New Ship"),
+                  text: "Display Shipments"),
+              Tab(icon: Icon(Icons.add_circle), text: "Add Shipment"),
               Tab(icon: Icon(Icons.attach_money), text: "View Prices")
             ],
           ),
         ),
         body: const TabBarView(
-          children: [DisplayShip(), AddShip(), ShippingPrices()],
+          children: [
+            DisplayShip(),
+            AddShip(),
+            ShippingPrices(),
+          ],
         ),
       ),
     );

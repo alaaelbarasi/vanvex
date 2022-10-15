@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 
+import '../model/shipment.dart';
 import '../widgets/appBar_widget.dart';
 
 class ViewShip extends StatefulWidget {
-  const ViewShip({super.key});
-
+  ViewShip({super.key, required this.response});
+  ShipmentModel response;
   @override
   State<ViewShip> createState() => _ViewShipState();
 }
 
 class _ViewShipState extends State<ViewShip> {
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(screen_name: "View Ship"),
+      appBar: const AppBarWidget(screen_name: "View Shipment"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0, right: 10, left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -44,23 +46,23 @@ class _ViewShipState extends State<ViewShip> {
                       width: 10,
                     ),
                     Text(
-                      "Ship Details",
+                      "Shipment Details",
                       style: TextStyle(color: Colors.white),
                     )
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "White Bag",
+                initialValue: widget.response.desc,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
                   ),
-                  labelText: 'Ship Description',
+                  labelText: 'Shipment Description',
                   labelStyle: const TextStyle(color: Colors.pink),
                 ),
                 style: TextStyle(color: Colors.blue.shade600),
@@ -70,7 +72,7 @@ class _ViewShipState extends State<ViewShip> {
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "1",
+                initialValue: widget.response.numberOfItems,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -85,7 +87,7 @@ class _ViewShipState extends State<ViewShip> {
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "100 LD",
+                initialValue: widget.response.price,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -100,17 +102,17 @@ class _ViewShipState extends State<ViewShip> {
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "Shipped",
+                initialValue: widget.response.state,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
                   ),
-                  labelText: 'Ship State',
+                  labelText: 'Shipment State',
                   labelStyle: const TextStyle(color: Colors.pink),
                 ),
                 style: TextStyle(color: Colors.blue.shade600),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -140,12 +142,12 @@ class _ViewShipState extends State<ViewShip> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "Sara Ahmed",
+                initialValue: widget.response.customerName,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -160,7 +162,7 @@ class _ViewShipState extends State<ViewShip> {
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "09373883",
+                initialValue: widget.response.customerPhone,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -175,7 +177,7 @@ class _ViewShipState extends State<ViewShip> {
               ),
               TextFormField(
                 readOnly: true,
-                initialValue: "Hay-Aldollar",
+                initialValue: widget.response.customerAddress,
                 decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue.shade600),
@@ -204,6 +206,8 @@ class _ViewShipState extends State<ViewShip> {
           ),
         ),
       ),
+      //   },
+      // ),
     );
   }
 }

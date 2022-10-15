@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'home_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -17,7 +15,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16, top: 20),
         child: Column(
@@ -85,13 +83,31 @@ class _LoginState extends State<Login> {
               height: 70,
               width: 150,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
-                    ),
-                  );
+                onPressed: () async {
+                  if (emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    if (emailController.text == "rodaina@gmail.com" &&
+                        passwordController.text == "password") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please Enter the Correct Data'),
+                        ),
+                      );
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please Enter all the Fields'),
+                      ),
+                    );
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor:

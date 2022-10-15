@@ -53,7 +53,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       },
                       child: CircleAvatar(
                         radius: 60.0,
-                        backgroundColor: Colors.blue.shade700,
+                        backgroundColor: Color.fromARGB(69, 227, 242, 253),
                         child: ProfilePicture(
                           name: provider.user?.name ?? 'User name',
                           radius: 31,

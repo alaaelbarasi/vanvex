@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:number_inc_dec/number_inc_dec.dart';
-import 'package:http/http.dart' as http;
+import 'package:vanvex/screens/shipping_screen.dart';
 
 import '../services/ship_api.dart';
 
@@ -276,10 +276,16 @@ class _AddShipState extends State<AddShip> {
                           content: Text('Shipment Was Added Successfully'),
                         ),
                       );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShippingScreen(),
+                        ),
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please Enter the'),
+                          content: Text('Please Enter the Fields'),
                         ),
                       );
                     }

@@ -15,7 +15,7 @@ class _SettingWidgetState extends State<SettingWidget> {
   @override
   void initState() {
     Provider.of<StoreProvider>(context, listen: false)
-        .getStoreFromApi(storeId: 2);
+        .getStoreFromApi(isInit: true, storeId: 2);
     super.initState();
   }
 

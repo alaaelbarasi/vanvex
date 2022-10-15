@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-import 'package:vanvex/model/sales_data.dart';
 
 import '../provider/shipment_provider.dart';
 
@@ -77,16 +75,24 @@ class _PaymentRecordWidgetState extends State<PaymentRecordWidget> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(Icons.receipt_long_sharp),
+                                const Icon(
+                                  Icons.receipt_long_sharp,
+                                  size: 30,
+                                ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(provider.ListOfshipments[index].state),
+                                Text(
+                                  "Status: ${provider.ListOfshipments[index].state}",
+                                  textAlign: TextAlign.left,
+                                ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Text(provider.ListOfshipments[index].price
-                                    .toString()),
+                                Text(
+                                  "Price: ${provider.ListOfshipments[index].price}",
+                                  textAlign: TextAlign.left,
+                                ),
                               ],
                             ),
                           ),
