@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
-import 'package:vanvex/widgets/textfield_market.dart';
 
 import '../provider/store_provider.dart';
+import '../screens/market_screen.dart';
+import '../services/store_api.dart';
 
 class SettingWidget extends StatefulWidget {
   const SettingWidget({Key? key}) : super(key: key);
@@ -12,10 +14,14 @@ class SettingWidget extends StatefulWidget {
 }
 
 class _SettingWidgetState extends State<SettingWidget> {
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneController = TextEditingController();
   @override
   void initState() {
     Provider.of<StoreProvider>(context, listen: false)
-        .getStoreFromApi(isInit: true, storeId: 2);
+        .getStoreFromApi(isInit: true, storeId: 1);
     super.initState();
   }
 
@@ -46,27 +52,63 @@ class _SettingWidgetState extends State<SettingWidget> {
                             ),
                           ),
                         ),
-                        //Image caused hasSize error when keybiard is raised
-                        TextFieldMarket(
-                          labelName: "Store label",
-                          hint: "Nike",
+                        TextFormField(
+                          controller: nameController,
+                          //  initialValue: provider.store?.email,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Store label",
+                            hintText: provider.store?.name,
+                          ),
                         ),
-                        TextFieldMarket(
-                          labelName: "Address",
-                          hint: "Benghazi",
+                        TextFormField(
+                          controller: addressController,
+                          // initialValue: provider.store?.email,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Address",
+                            hintText: provider.store?.address,
+                          ),
                         ),
-                        TextFieldMarket(
-                          labelName: "Phone",
-                          hint: "09123456789",
+                        TextFormField(
+                          controller: emailController,
+                          // initialValue: provider.store?.email,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Email",
+                            hintText: provider.store?.email,
+                          ),
                         ),
-                        TextFieldMarket(
-                          labelName: "Email",
-                          hint: "email@email.com",
+                        TextFormField(
+                          controller: phoneController,
+                          // initialValue: provider.store?.phone,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Phone",
+                            hintText: provider.store?.phone,
+                          ),
                         ),
-                        TextFieldMarket(
-                          labelName: "Owner",
-                          hint: "Mohamed",
-                        ),
+
+                        // TextFieldMarket(
+                        //   labelName: "Store label",
+                        //   hint: "Nike",
+                        // ),
+                        // TextFieldMarket(
+                        //   labelName: "Address",
+                        //   hint: "Benghazi",
+                        // ),
+                        // TextFieldMarket(
+                        //   labelName: "Phone",
+                        //   hint: "09123456789",
+                        // ),
+                        // TextFieldMarket(
+                        //   labelName: "Email",
+                        //   hint: "email@email.com",
+                        // ),
+                        // TextFieldMarket(
+                        //   labelName: "Owner",
+                        //   hint: "Mohamed",
+                        // ),
                         Container(
                           margin: const EdgeInsets.only(top: 30),
                           child: OutlinedButton(
@@ -75,8 +117,41 @@ class _SettingWidgetState extends State<SettingWidget> {
                                     borderRadius: BorderRadius.circular(50)),
                                 textStyle: const TextStyle(fontSize: 20),
                               ),
-                              onPressed: () {},
-                              child: const Text("Submit")),
+                              onPressed: () async {
+                                final response = await StoreApi().updateStore(
+                                    address: addressController.text,
+                                    storeLabel: nameController.text,
+                                    storeID: provider.store?.id,
+                                    phone: phoneController.text,
+                                    email: emailController.text,
+                                    owner: "ali");
+                                if (response) {
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          'Store Details Have Been Updated Successfully'),
+                                    ),
+                                  );
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MarketScreen(),
+                                    ),
+                                  );
+                                } else {
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text('Please Enter the Fields Again'),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: const Text("Update")),
                         )
                       ],
                     ),

@@ -62,7 +62,7 @@ class StoreApi {
       "phone": phone.toString(),
     };
     final response = await http.patch(
-      Uri.parse("storeUrl$storeID"),
+      Uri.parse(storeUrl + "/" + storeID.toString()),
       body: jsonEncode(data),
       headers: {'Content-type': 'application/json'},
     );
